@@ -83,12 +83,11 @@ def compare(new_file, old_file, mods=True):
 import md_toc
 
 if __name__ == "__main__":
-    compare_file = "mods"
+    compare_file = "base_items"
 
 
-    md_compare = compare(f"3.7.0/{compare_file}.json", f"3.6.0/{compare_file}.json",mods=False)
+    md_compare = compare(f"3.8.0/{compare_file}.json", f"3.7.0/{compare_file}.json",mods=False)
 
-    output_file = f"3.6.0_3.7.0_{compare_file}.md"
+    output_file = f"3.7.0_3.8.0_{compare_file}.md"
     with open(output_file, "w") as f:
         f.write(md_compare)
-    print(md_toc.build_toc(output_file))

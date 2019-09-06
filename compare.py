@@ -83,7 +83,7 @@ def compare(new_file, old_file, mods=True):
 import md_toc
 
 if __name__ == "__main__":
-    compare_file = "base_items"
+    compare_file = "gems"
 
 
     md_compare = compare(f"3.8.0/{compare_file}.json", f"3.7.0/{compare_file}.json",mods=False)

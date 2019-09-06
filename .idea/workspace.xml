@@ -10,14 +10,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/compare.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="35" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+            <state relative-caret-position="430">
+              <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/3.8.0/base_items.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="19734" column="34" selection-start-line="19734" selection-start-column="13" selection-end-line="19734" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/3.8.0/mods.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="77">
+              <caret line="150158" column="46" lean-forward="true" selection-start-line="150158" selection-start-column="46" selection-end-line="150158" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -76,6 +94,9 @@
       <find>granted_effect_id</find>
       <find>grants_effects</find>
       <find>OTHER</find>
+      <find>hallowed</find>
+      <find>sanctified mana flask</find>
+      <find>FlaskIncreasedRecoveryAmountUniqueFlask4</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -119,6 +140,11 @@
               <item name="RePoE-compare" type="b2602c69:ProjectViewProjectNode" />
               <item name="RePoE-compare" type="462c0819:PsiDirectoryNode" />
               <item name="3.7.0" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RePoE-compare" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RePoE-compare" type="462c0819:PsiDirectoryNode" />
+              <item name="3.8.0" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -216,7 +242,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32941177" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -290,11 +316,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/compare.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="35" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        <state relative-caret-position="430">
+          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3.8.0/base_items.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="19734" column="34" selection-start-line="19734" selection-start-column="13" selection-end-line="19734" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3.8.0/mods.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="150158" column="46" lean-forward="true" selection-start-line="150158" selection-start-column="46" selection-end-line="150158" selection-end-column="46" />
         </state>
       </provider>
     </entry>

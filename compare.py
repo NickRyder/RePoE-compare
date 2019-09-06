@@ -19,7 +19,7 @@ def compare(new_file, old_file):
         print_string += "# DELETED MODS\n"
         for deleted_key in deleted_keys:
             print_string += f"#### {deleted_key}\n"
-            print_string += f"```{json.dumps(old_file_json[deleted_key], indent=4, sort_keys=True)}```\n"
+            print_string += f"```\n{json.dumps(old_file_json[deleted_key], indent=4, sort_keys=True)}\n```\n"
 
     if len(added_keys) > 0:
         print_string += "# ADDED MODS\n"
@@ -42,7 +42,7 @@ def compare(new_file, old_file):
                 print_string += f"### {added_generation_type}\n"
                 for added_key in added_dict[added_domain][added_generation_type]:
                     print_string += f"#### {added_key}\n"
-                    print_string += f"```{json.dumps(new_file_json[added_key], indent=4, sort_keys=True)}```\n"
+                    print_string += f"```\n {json.dumps(new_file_json[added_key], indent=4, sort_keys=True)}\n```\n"
 
     print_string += f"# CHANGED MODS\n"
     for same_key in same_keys:
@@ -53,11 +53,11 @@ def compare(new_file, old_file):
             print_string += f"#### {same_key}\n"
             for key in new_item:
                 if str(new_item[key]) != str(old_item[key]):
-                    print_string += f"```##### {key}\n"
-                    print_string += f"-new-\n"
+                    print_string += f"##### {key}\n"
+                    print_string += f"```\n-new-\n"
                     print_string += f"{new_item[key]} \n"
                     print_string += f"-old-\n"
-                    print_string += f"{old_item[key]} ```\n"
+                    print_string += f"{old_item[key]} \n```\n"
 
 
     return print_string
@@ -66,3 +66,4 @@ def compare(new_file, old_file):
 
 if __name__ == "__main__":
     md_compare = compare("3.7.0/mods.json", "3.6.0/mods.json")
+    print(md_compare)

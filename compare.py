@@ -28,25 +28,31 @@ def generate_added_keys_for_mods(added_keys, new_file_json):
     return print_string
 
 
+import re
+
+
+def _strip_camel_case(string):
+    return re.findall("[A-Z][a-z]*", string)
+
+
 def longest_substring_finder(string1, string2):
     """https://stackoverflow.com/questions/18715688/find-common-substring-between-two-strings
     generates longest substring of string1, string2"""
-    answer = ""
+    answer = []
+    string1, string2 = _strip_camel_case(string1), _strip_camel_case(string2)
     len1, len2 = len(string1), len(string2)
     for i in range(len1):
-        match = ""
+        match = []
         for j in range(len2):
-            if (
-                i + j < len1
-                and string1[i + j] == string2[j]
-                and (len(match) > 0 or string2[j].isupper())
-            ):
-                match += string2[j]
+            if i + j < len1 and string1[i + j] == string2[j]:
+                match += [string2[j]]
             else:
                 if len(match) > len(answer):
                     answer = match
-                match = ""
-    return answer
+                match = []
+        if len(match) > len(answer):
+            answer = match
+    return "".join(answer)
 
 
 import itertools
@@ -67,17 +73,29 @@ def cluster_keys(keys, minimum_shared_substring_length=5, minimum_cluster_size=6
             substring_clusters[common_substring] += 1
 
     trimmed_dict = {}
-    unused_keys = keys.copy()
-    for key, value in tqdm(substring_clusters.items()):
-        if value >= minimum_cluster_size:
-            trimmed_dict[key] = set()
-            for key_full in keys:
-                if key in key_full:
-                    trimmed_dict[key].add(key_full)
-                    if key in unused_keys:
-                        unused_keys.remove(key)
+    trimmed_dict["OTHER"] = set()
+    for cluster_key, cluster_count in substring_clusters.items():
+        if cluster_count >= minimum_cluster_size:
+            trimmed_dict[cluster_key] = set()
 
-    return trimmed_dict, unused_keys
+    for key in keys:
+        key_name = "".join(_strip_camel_case(key))
+        max_cluster_key = ""
+        for cluster_key in trimmed_dict:
+            if cluster_key in key_name and len(max_cluster_key) < len(cluster_key):
+                max_cluster_key = cluster_key
+        if max_cluster_key != "":
+            trimmed_dict[max_cluster_key].add(key)
+        else:
+            trimmed_dict["OTHER"].add(key)
+
+    final_dict = {}
+    for key, value in trimmed_dict.items():
+        if len(value) > 0:
+            final_dict[key] = value
+
+
+    return final_dict
 
 
 def _create_collapsible_section(title, data):
@@ -105,7 +123,7 @@ def compare(new_file, old_file, mods=True):
             changed_keys.remove(key)
 
     if len(deleted_keys) > 0:
-        clusters_to_keys, unused_keys = cluster_keys(deleted_keys)
+        clusters_to_keys = cluster_keys(deleted_keys)
         deleted_text = ""
         for cluster in clusters_to_keys:
             cluster_text = ""
@@ -120,7 +138,8 @@ def compare(new_file, old_file, mods=True):
     #     print_string += generate_added_keys_for_mods(added_keys, new_file_json)
     # else:
     if len(added_keys) > 0:
-        clusters_to_keys, unused_keys = cluster_keys(added_keys)
+        clusters_to_keys = cluster_keys(added_keys)
+        print(clusters_to_keys.keys())
         added_text = ""
         for cluster in clusters_to_keys:
             cluster_text = ""
@@ -132,7 +151,8 @@ def compare(new_file, old_file, mods=True):
         print_string += _create_collapsible_section("ADDED", added_text)
 
     if len(changed_keys) > 0:
-        clusters_to_keys, unused_keys = cluster_keys(changed_keys)
+        clusters_to_keys = cluster_keys(changed_keys)
+        print(clusters_to_keys.keys())
         changed_text = ""
         for cluster in clusters_to_keys:
             cluster_text = ""
@@ -159,3 +179,4 @@ if __name__ == "__main__":
     output_file = f"3.7.0_3.8.0_{compare_file}.md"
     with open(output_file, "w") as f:
         f.write(md_compare)
+

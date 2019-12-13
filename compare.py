@@ -84,8 +84,8 @@ def _create_collapsible_section(title, data):
     return f"<details>\n <summary>{title}</summary><blockquote> \n {data} \n </blockquote></details>\n"
 
 
-def _json_code_block(json):
-    return f"```\n{json.dumps(json, indent=4, sort_keys=True)}\n```\n"
+def _json_code_block(json_entry):
+    return f"\n```\n{json.dumps(json_entry, indent=4, sort_keys=True)}\n```\n"
 
 
 def compare(new_file, old_file, mods=True):
@@ -132,37 +132,19 @@ def compare(new_file, old_file, mods=True):
         print_string += _create_collapsible_section("ADDED", added_text)
 
     if len(changed_keys) > 0:
-        clusters_to_keys, unused_keys = cluster_keys(added_keys)
+        clusters_to_keys, unused_keys = cluster_keys(changed_keys)
         changed_text = ""
         for cluster in clusters_to_keys:
             cluster_text = ""
             for key in clusters_to_keys[cluster]:
-                key_text = f"```\n-new-\n"
+                key_text = f"\n`-new-`\n"
                 key_text += _json_code_block(new_file_json[key])
-                key_text += f"-old-\n"
+                key_text += f"\n`-old-`\n"
                 key_text += _json_code_block(old_file_json[key])
                 cluster_text += _create_collapsible_section(key, key_text)
 
             changed_text += _create_collapsible_section(cluster, cluster_text)
-        print_string += _create_collapsible_section("ADDED", changed_text)
-
-    print_string += f"# CHANGED\n"
-    for same_key in same_keys:
-        if str(new_file_json[same_key]) != str(old_file_json[same_key]):
-            new_item = new_file_json[same_key]
-            old_item = old_file_json[same_key]
-
-            print_string += f"#### {same_key}\n"
-            all_keys = set(new_item.keys()).union(set(old_item.keys()))
-            for key in all_keys:
-                new_key = new_item.get(key, "")
-                old_key = old_item.get(key, "")
-                if str(new_key) != str(old_key):
-                    print_string += f"##### {key}\n"
-                    print_string += f"```\n-new-\n"
-                    print_string += f"{new_key} \n"
-                    print_string += f"-old-\n"
-                    print_string += f"{old_key} \n```\n"
+        print_string += _create_collapsible_section("CHANGED", changed_text)
 
     return print_string
 

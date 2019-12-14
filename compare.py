@@ -173,10 +173,10 @@ if __name__ == "__main__":
     compare_file = "mods"
 
     md_compare = compare(
-        f"3.8.0/{compare_file}.json", f"3.7.0/{compare_file}.json", mods=False
+        f"3.9.0/{compare_file}.json", f"3.8.0/{compare_file}.json", mods=False
     )
 
-    output_file = f"3.7.0_3.8.0_{compare_file}.md"
+    output_file = f"3.8.0_3.9.0_{compare_file}.md"
     with open(output_file, "w") as f:
         f.write(md_compare)
 

@@ -31,7 +31,7 @@ def compare_translations(new_file_path, old_file_path):
 
     new_mods = json.load(open(new_file_path + "mods.json", "r"))
 
-    new_gems = json.load(open(new_file_path + "gems.json", "r"))
+    # new_gems = json.load(open(new_file_path + "gems.json", "r"))
 
     new_stat_translations = get_stat_translations(new_file_json)
     old_stat_translations = get_stat_translations(old_file_json)
@@ -41,10 +41,10 @@ def compare_translations(new_file_path, old_file_path):
         for stat in mod_value.get("spawn_weights", []):
             new_mod_stats.add(stat["tag"])
 
-    for gem_value in new_gems.values():
-        if "acvite_skill" in gem_value:
-            for stat in gem_value["active_skill"]["stat_conversions"]:
-                new_mod_stats.add(stat["tag"])
+    # for gem_value in new_gems.values():
+    #     if "acvite_skill" in gem_value:
+    #         for stat in gem_value["active_skill"]["stat_conversions"]:
+    #             new_mod_stats.add(stat["tag"])
 
     new_stat_translations_not_mod = get_stat_translations_not_in(
         new_file_json, new_mod_stats
@@ -83,13 +83,13 @@ def compare_stats(new_file_path, old_file_path):
 if __name__ == "__main__":
     compare_file = "stat_translations"
 
-    md_compare = compare_translations(f"3.8.0/", f"3.7.0/")
+    md_compare = compare_translations(f"3.9.0/", f"3.8.0/")
     # compare_file = "stats"
     # md_compare = compare_stats(
     #     f"3.8.0/{compare_file}.json", f"3.7.0/{compare_file}.json"
     # )
 
-    output_file = f"3.7.0_3.8.0_{compare_file}.md"
+    output_file = f"3.8.0_3.9.0_{compare_file}.md"
     with open(output_file, "w") as f:
         f.write(md_compare)
 
